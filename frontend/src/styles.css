@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+h1, h2, {
+  text-align: center;
+}
+
+button {
+  margin: 5px;
+}
+
+.addpollform {
+  margin-left: 50px;
+  margin-top: 20px;
+  width: 45%;
+  float:left;
+}
+
+.addPollText{
+  width: 45%;
+  float:right;
+}
+
+.inputLabel {
+  font-size: 14px;
+  text-align: left;
+}
