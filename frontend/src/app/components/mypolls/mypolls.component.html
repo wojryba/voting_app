@@ -1,3 +1,6 @@
-<p>
-  mypolls works!
-</p>
+<div class="polls"  *ngFor="let poll of polls, let i = index">
+  <div >
+    <button class="allPolls" (click)="onClick(i)">{{poll.title}}</button>
+
+  </div>
+</div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { Poll } from './poll';
+import { FetchDataService } from '../../services/fetch-data.service';
+
 
 @Component({
   selector: 'app-newpoll',
@@ -10,7 +12,7 @@ import { Poll } from './poll';
 export class NewpollComponent implements OnInit {
   public poll: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private dataService: FetchDataService) {}
 
 
   ngOnInit() {
@@ -41,7 +43,12 @@ export class NewpollComponent implements OnInit {
 
 
   onSubmit() {
-    console.log(this.poll.value, this.poll.valid);
+    let po = this.poll.value;
+    this.dataService.postNewPoll(po).subscribe(
+            response => console.log(response), // success
+            error => console.log(error),       // error
+            () => console.log('completed')     // complete
+    )
   }
 
 

@@ -1,0 +1,19 @@
+<div class=container>
+  <div class="form">
+    <h2>{{title}}</h2>
+
+    <p><strong>I'd like to vote for:</strong></p>
+    <div class="dropdown" dropdown>
+        <button class="btn" dropdown-open>Select Option</button>
+        <ul class="dropdown-menu">
+            <li *ngFor="let option of options; let i = index" (click)="onClick(i)">{{option.option}}</li>
+        </ul>
+    </div>
+
+
+
+  </div>
+
+
+
+</div>

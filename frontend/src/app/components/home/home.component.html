@@ -1,5 +1,19 @@
 <div class="container">
-  <h1>This is FCC Voting App</h1>
-  <h2>Below you can see polls hosted by the app.</h2>
-  <h2>You can select the pool to see resoults and vote.</h2>
+
+
+  <div>
+    <h1>This is FCC Voting App</h1>
+    <h2>Below you can see polls hosted by the app.</h2>
+    <h2>You can select the pool to see resoults and vote.</h2>
+  </div>
+
+
+
+
+  <div class="polls"  *ngFor="let poll of polls, let i = index">
+    <div >
+      <button class="allPolls" (click)="onClick(i)">{{poll.title}}</button>
+
+    </div>
+  </div>
 </div>

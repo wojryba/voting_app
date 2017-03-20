@@ -3,8 +3,10 @@ const Schema = mongoose.Schema;
 const findOrCreate = require('mongoose-findorcreate');
 
 var User = new Schema ({
-  twitterId: String,
-  pools: {type: Array, "polls": []}
+  google: String,
+  twitter: String,
+  facebook: String,
+  pools: {type: Array, default: []}
 });
 User.plugin(findOrCreate);
 var User = mongoose.model('User', User);

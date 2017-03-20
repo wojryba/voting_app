@@ -1,0 +1,16 @@
+.allPolls {
+  width: 100%;
+  padding:25px;
+  border: 1px solid #686868;
+  background: #ebebe0;
+  border-radius: 25px;
+  text-align: center;
+}
+
+.polls {
+  margin: 10px;
+}
+
+.container {
+  text-align: center;
+}
