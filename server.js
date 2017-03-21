@@ -31,6 +31,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 //add middleware bodyparser
 app.use(bodyParser.json());
 
+app.all('*', (req: any, res: any) => {
+  console.log(`[TRACE] Server 404 request: ${req.originalUrl}`);
+  res.status(200).sendFile(index_file);
+});
 
 
 
