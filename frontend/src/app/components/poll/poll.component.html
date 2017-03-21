@@ -40,11 +40,11 @@
               </form>
             </div>
         <br>
-        <a (click)="tweet()"><h3>Share on Twitter</h3><i class="fa fa-twitter fa-5x" aria-hidden="true"></i></a>
+        <a *ngIf="auth.authenticated()"  (click)="tweet()"><h3>Share on Twitter</h3><i class="fa fa-twitter fa-5x" aria-hidden="true"></i></a>
       </div>
       <br>
       <div>
-          <button *ngIf="auth.authenticated()" class="btn btn-danger" *ngIf="showRemove" (click)="removePoll()">Delete this poll.</button>
+          <button class="btn btn-danger" *ngIf="showRemove" (click)="removePoll()">Delete this poll.</button>
       </div>
   </div>
 
