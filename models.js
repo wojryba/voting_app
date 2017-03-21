@@ -2,13 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const findOrCreate = require('mongoose-findorcreate');
 
-var User = new Schema ({
-  google: String,
-  twitter: String,
-  facebook: String,
-  pools: {type: Array, default: []}
-});
-User.plugin(findOrCreate);
-var User = mongoose.model('User', User);
 
-module.exports = User;
+var Poll = new Schema({
+  user: String,
+  title: String,
+  options: {type: Array, default: []}
+})
+Poll.plugin(findOrCreate);
+var Poll = mongoose.model('Poll', Poll);
+module.exports = Poll;

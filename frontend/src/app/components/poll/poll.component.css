@@ -1,0 +1,17 @@
+.options h2, h4 {
+  text-align: left;
+}
+
+
+.dropdown-menu {
+  width: 100%;
+  font-size: 14px;
+}
+
+.form-control {
+  text-align: center;
+}
+
+.btn {
+  width: 80%;
+}

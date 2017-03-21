@@ -1,18 +1,28 @@
 <h2>Add a new Poll</h2>
 
-<div class="addpollform">
-<form novalidate (ngSubmit)="onSubmit(poll)" [formGroup]="poll">
+<div class="rightContainer">
+  <h3>Here you can add a new Poll.</h3>
+  <br>
+  <h4>You must fill in the title, and add at least one option.</h4>
+  <h4>To add another option click the add another option button.</h4>
+  <h4>You can add as many options as you like.</h4>
+  <h4>To remove option click the remove option button.</h4>
+
+</div>
+
+<div class="leftContainer">
+      <form novalidate (ngSubmit)="onSubmit(poll)" [formGroup]="poll">
 
 
-      <label >
-        <span class="inputLabel">Title:</span>
-        <input class="form-control" type="text" formControlName="title">
-      </label>
-      <div class="error" *ngIf="poll.get('title').hasError('required') && poll.get('title').touched">
-        Name is required
-      </div>
+        <label >
+          <span class="inputLabel">Title:</span>
+          <input class="form-control" type="text" formControlName="title">
+        </label>
+        <div class="error" *ngIf="poll.get('title').hasError('required') && poll.get('title').touched">
+          Title and at least one option are required
+        </div>
 
-      <div formArrayName="options">
+        <div formArrayName="options">
         <div *ngFor="let option of poll.controls.options.controls; let i=index">
 
            <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
@@ -36,15 +46,5 @@
 
     </form>
     <!--add add button-->
-<button class="btn btn-default" (click)="addOption()">Add another option</button>
+    <button class="btn btn-default" (click)="addOption()">Add another option</button>
   </div>
-
-
-<div class="addPollText">
-  <h3>You can add a new poll here.</h3>
-  <h4>You must fill in the title, and add at least one option.</h4>
-  <h4>To add another option click the add another option button.</h4>
-  <h4>You can add as many options as you like.</h4>
-  <h4>To remove option click the remove option button.</h4>
-
-</div>

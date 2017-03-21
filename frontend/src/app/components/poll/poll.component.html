@@ -1,19 +1,52 @@
+
 <div class=container>
-  <div class="form">
-    <h2>{{title}}</h2>
 
-    <p><strong>I'd like to vote for:</strong></p>
-    <div class="dropdown" dropdown>
-        <button class="btn" dropdown-open>Select Option</button>
-        <ul class="dropdown-menu">
-            <li *ngFor="let option of options; let i = index" (click)="onClick(i)">{{option.option}}</li>
-        </ul>
-    </div>
-
-
-
+  <div class="chart">
+      <canvas baseChart
+              [data]="doughnutChartData"
+              [labels]="doughnutChartLabels"
+              [chartType]="doughnutChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+      </canvas>
   </div>
 
+
+  <div class="options">
+
+
+        <div class="form">
+            <h2>{{title}}</h2>
+            <br>
+            <h4><strong>I'd like to vote for:</strong></h4>
+            <div class="dropdown" dropdown>
+                <button class="form-control" dropdown-open>Select Option</button>
+                <ul class="dropdown-menu">
+                    <li class="form-control" *ngFor="let option of options; let i = index" (click)="onClick(i)">{{option.option}}</li>
+                    <li class="form-control" *ngIf="auth.authenticated()" (click)="showAdd = true">add another option</li>
+                </ul>
+            </div>
+
+            <div *ngIf="showAdd">
+              <form novalidate (ngSubmit)=onSubmit(form) [formGroup]="form">
+                <label>
+                  <span class="inputLabel">Option:</span>
+                  <input class="form-control" type="text" formControlName="option">
+                </label>
+                <div class="error" *ngIf="form.get('option').hasError('required') && form.get('option').touched">
+                  You must input some option!
+                </div>
+                <button class="btn btn-default" type="submit" [disabled]="form.invalid">Add Option</button>
+              </form>
+            </div>
+        <br>
+        <a (click)="tweet()"><h3>Share on Twitter</h3><i class="fa fa-twitter fa-5x" aria-hidden="true"></i></a>
+      </div>
+      <br>
+      <div>
+          <button class="btn btn-danger" *ngIf="showRemove" (click)="removePoll()">Delete this poll.</button>
+      </div>
+  </div>
 
 
 </div>

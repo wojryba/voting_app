@@ -1,3 +1,6 @@
+<h3>Below you can see polls that you have created.</h3>
+<h4>You can select a poll to see results, or to delete it.</h4>
+<h4>If you want, you can always</h4><a [routerLink]="['/newPoll']">create new poll.</a>
 <div class="polls"  *ngFor="let poll of polls, let i = index">
   <div >
     <button class="allPolls" (click)="onClick(i)">{{poll.title}}</button>

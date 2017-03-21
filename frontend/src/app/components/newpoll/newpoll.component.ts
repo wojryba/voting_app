@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { Poll } from './poll';
 import { FetchDataService } from '../../services/fetch-data.service';
-
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-newpoll',
@@ -12,7 +12,7 @@ import { FetchDataService } from '../../services/fetch-data.service';
 export class NewpollComponent implements OnInit {
   public poll: FormGroup;
 
-  constructor(private fb: FormBuilder, private dataService: FetchDataService) {}
+  constructor(private fb: FormBuilder, private dataService: FetchDataService, private router: Router) {}
 
 
   ngOnInit() {
@@ -20,13 +20,13 @@ export class NewpollComponent implements OnInit {
       title: ['', Validators.required],
       options: this.fb.array([
         this.initOption()
-      ])
+    ])
     });
   }
 
   initOption() {
     return this.fb.group({
-      option: ['']
+      option: ['', Validators.required]
     })
   }
 
@@ -49,6 +49,7 @@ export class NewpollComponent implements OnInit {
             error => console.log(error),       // error
             () => console.log('completed')     // complete
     )
+    this.router.navigate(["myPolls"]);
   }
 
 

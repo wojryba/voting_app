@@ -3,10 +3,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
 const mongoose = require('mongoose')
-const User = require('./models');
+const Poll = require('./models');
 require('dotenv').config();
 const findOrCreate = require('mongoose-findorcreate');
-
 
 
 

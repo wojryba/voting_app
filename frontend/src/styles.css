@@ -7,17 +7,58 @@ button {
   margin: 5px;
 }
 
-.addpollform {
-  margin-left: 50px;
-  margin-top: 20px;
-  width: 45%;
-  float:left;
+
+.allPolls {
+  width: 80%;
+  padding:10px;
+  border: 1px solid #686868;
+  background: #ebebe0;
+  border-radius: 25px;
+  text-align: center;
 }
 
-.addPollText{
-  width: 45%;
-  float:right;
+.polls {
+  margin: 10px;
+  width: 100%;
+  text-align: center;
 }
+
+.container {
+  text-align: center;
+}
+
+
+@media (min-width: 768px){
+  .leftContainer {
+    text-align: left;
+    margin-left: 50px;
+    margin-top: 20px;
+    width: 45%;
+    float:left;
+  }
+
+
+  .rightContainer{
+    width: 45%;
+    float:right;
+    margin-right: 20px;
+    text-align: left;
+  }
+
+  .options {
+    margin-top: 20px;
+    float: left;
+    width: 35%;
+  }
+
+  .chart{
+    margin-top: 40px;
+    float: right;
+    width: 65%;
+  }
+
+}
+
 
 .inputLabel {
   font-size: 14px;
