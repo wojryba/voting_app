@@ -901,7 +901,7 @@ module.exports = "<h2>Add a new Poll</h2>\n\n<div class=\"rightContainer\">\n  <
 /***/ 537:
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=container>\n\n  <div class=\"chart\">\n      <canvas baseChart\n              [data]=\"doughnutChartData\"\n              [labels]=\"doughnutChartLabels\"\n              [chartType]=\"doughnutChartType\"\n              (chartHover)=\"chartHovered($event)\"\n              (chartClick)=\"chartClicked($event)\">\n      </canvas>\n  </div>\n\n\n  <div class=\"options\">\n\n\n        <div class=\"form\">\n            <h2>{{title}}</h2>\n            <br>\n            <h4><strong>I'd like to vote for:</strong></h4>\n            <div class=\"dropdown\" dropdown>\n                <button class=\"form-control\" dropdown-open>Select Option</button>\n                <ul class=\"dropdown-menu\">\n                    <li class=\"form-control\" *ngFor=\"let option of options; let i = index\" (click)=\"onClick(i)\">{{option.option}}</li>\n                    <li class=\"form-control\" *ngIf=\"auth.authenticated()\" (click)=\"showAdd = true\">add another option</li>\n                </ul>\n            </div>\n\n            <div *ngIf=\"showAdd\">\n              <form novalidate (ngSubmit)=onSubmit(form) [formGroup]=\"form\">\n                <label>\n                  <span class=\"inputLabel\">Option:</span>\n                  <input class=\"form-control\" type=\"text\" formControlName=\"option\">\n                </label>\n                <div class=\"error\" *ngIf=\"form.get('option').hasError('required') && form.get('option').touched\">\n                  You must input some option!\n                </div>\n                <button class=\"btn btn-default\" type=\"submit\" [disabled]=\"form.invalid\">Add Option</button>\n              </form>\n            </div>\n        <br>\n        <a (click)=\"tweet()\"><h3>Share on Twitter</h3><i class=\"fa fa-twitter fa-5x\" aria-hidden=\"true\"></i></a>\n      </div>\n      <br>\n      <div>\n          <button class=\"btn btn-danger\" *ngIf=\"showRemove\" (click)=\"removePoll()\">Delete this poll.</button>\n      </div>\n  </div>\n\n\n</div>\n"
+module.exports = "\n<div class=container>\n\n  <div class=\"chart\">\n      <canvas baseChart\n              [data]=\"doughnutChartData\"\n              [labels]=\"doughnutChartLabels\"\n              [chartType]=\"doughnutChartType\"\n              (chartHover)=\"chartHovered($event)\"\n              (chartClick)=\"chartClicked($event)\">\n      </canvas>\n  </div>\n\n\n  <div class=\"options\">\n\n\n        <div class=\"form\">\n            <h2>{{title}}</h2>\n            <br>\n            <h4><strong>I'd like to vote for:</strong></h4>\n            <div class=\"dropdown\" dropdown>\n                <button class=\"form-control\" dropdown-open>Select Option</button>\n                <ul class=\"dropdown-menu\">\n                    <li class=\"form-control\" *ngFor=\"let option of options; let i = index\" (click)=\"onClick(i)\">{{option.option}}</li>\n                    <li class=\"form-control\" *ngIf=\"auth.authenticated()\" (click)=\"showAdd = true\">add another option</li>\n                </ul>\n            </div>\n\n            <div *ngIf=\"showAdd\">\n              <form novalidate (ngSubmit)=onSubmit(form) [formGroup]=\"form\">\n                <label>\n                  <span class=\"inputLabel\">Option:</span>\n                  <input class=\"form-control\" type=\"text\" formControlName=\"option\">\n                </label>\n                <div class=\"error\" *ngIf=\"form.get('option').hasError('required') && form.get('option').touched\">\n                  You must input some option!\n                </div>\n                <button class=\"btn btn-default\" type=\"submit\" [disabled]=\"form.invalid\">Add Option</button>\n              </form>\n            </div>\n        <br>\n        <a (click)=\"tweet()\"><h3>Share on Twitter</h3><i class=\"fa fa-twitter fa-5x\" aria-hidden=\"true\"></i></a>\n      </div>\n      <br>\n      <div>\n          <button *ngIf=\"auth.authenticated()\" class=\"btn btn-danger\" *ngIf=\"showRemove\" (click)=\"removePoll()\">Delete this poll.</button>\n      </div>\n  </div>\n\n\n</div>\n"
 
 /***/ }),
 
@@ -949,38 +949,46 @@ var FetchDataService = (function () {
         this._http = _http;
         this.authHttp = authHttp;
     }
+    //get all polls form db
     FetchDataService.prototype.getAllPolls = function () {
         return this._http.get('api/allPolls')
             .map(function (res) { return res.json(); });
     };
+    //get polls post by this user
     FetchDataService.prototype.getUserPolls = function () {
         return this.authHttp.get('api/userPolls')
             .map(function (res) { return res.json(); });
     };
+    //get poll by id, to enable entering site through id
+    //and make charts working
     FetchDataService.prototype.getThisPoll = function (id) {
         var encoded_data = JSON.stringify({ id: id });
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json;charset=utf-8' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers });
         return this._http.post('api/thisPoll', encoded_data, options);
     };
+    //add poll to database
     FetchDataService.prototype.postNewPoll = function (poll) {
         var encoded_data = JSON.stringify({ poll: poll });
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json;charset=utf-8' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers });
         return this.authHttp.post('api/new', encoded_data, options);
     };
+    //update votes in db
     FetchDataService.prototype.postVotes = function (poll) {
         var encoded_data = JSON.stringify({ poll: poll });
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json;charset=utf-8' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers });
-        return this.authHttp.post('api/vote', encoded_data, options);
+        return this._http.post('api/vote', encoded_data, options);
     };
+    //delete poll form db
     FetchDataService.prototype.remove = function (poll) {
         var encoded_data = JSON.stringify({ poll: poll });
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json;charset=utf-8' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers });
         return this.authHttp.post('api/remove', encoded_data, options);
     };
+    //check if current user created the poll
     FetchDataService.prototype.removeOption = function (poll) {
         var encoded_data = JSON.stringify({ poll: poll });
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json;charset=utf-8' });

@@ -44,7 +44,7 @@
       </div>
       <br>
       <div>
-          <button class="btn btn-danger" *ngIf="showRemove" (click)="removePoll()">Delete this poll.</button>
+          <button *ngIf="auth.authenticated()" class="btn btn-danger" *ngIf="showRemove" (click)="removePoll()">Delete this poll.</button>
       </div>
   </div>
 
