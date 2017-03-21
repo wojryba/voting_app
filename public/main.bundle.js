@@ -534,7 +534,7 @@ var PollComponent = (function () {
         this.titles = [];
         this.showAdd = false;
         this.showRemove = false;
-        this.BU = "https://twitter.com/intent/tweet?url=http%3A%2F%2Flocalhost%3A4200%2Fr%2F" + this.id;
+        this.BU = "https://twitter.com/intent/tweet?url=https%3A%2F%2Fdamp-coast-64326.herokuapp.com%2Fr%2F" + this.id;
         // Doughnut chart
         this.doughnutChartLabels = this.titles;
         this.doughnutChartData = this.votes;

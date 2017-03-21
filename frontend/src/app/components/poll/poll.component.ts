@@ -27,7 +27,8 @@ export class PollComponent implements OnInit {
   public showRemove = false;
   public form: FormGroup;
 
-  public BU:string= "https://twitter.com/intent/tweet?url=http%3A%2F%2Flocalhost%3A4200%2Fr%2F" + this.id;
+
+  public BU:string= "https://twitter.com/intent/tweet?url=https%3A%2F%2Fdamp-coast-64326.herokuapp.com%2Fr%2F" + this.id;
   // Doughnut chart
   public doughnutChartLabels:string[] = this.titles;
   public doughnutChartData:number[] = this.votes;
