@@ -31,15 +31,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 //add middleware bodyparser
 app.use(bodyParser.json());
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/index.html'));
-});
 
 
 //setting the routes
 const api = require('./routes/api')
 app.use('/api', api);
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 //start server
 app.listen(port, function(){
