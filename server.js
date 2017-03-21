@@ -9,7 +9,7 @@ const findOrCreate = require('mongoose-findorcreate');
 
 
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 var connect = process.env.MONGO_URI || "mongodb://localhost:27017/voting_app"
 mongoose.connect(connect);

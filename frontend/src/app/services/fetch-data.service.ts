@@ -13,13 +13,13 @@ export class FetchDataService {
 
 
   getAllPolls() {
-    return this._http.get('http://localhost:3000/api/allPolls')
+    return this._http.get('api/allPolls')
     .map((res)=>res.json())
 
   }
 
   getUserPolls(){
-    return this.authHttp.get('http://localhost:3000/api/userPolls')
+    return this.authHttp.get('api/userPolls')
     .map((res)=>res.json())
   }
 
@@ -28,7 +28,7 @@ export class FetchDataService {
     let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
     let options = new RequestOptions({ headers: headers });
 
-    return this.authHttp.post('http://localhost:3000/api/thisPoll', encoded_data,  options)
+    return this.authHttp.post('api/thisPoll', encoded_data,  options)
   }
 
 
@@ -37,7 +37,7 @@ export class FetchDataService {
     let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
     let options = new RequestOptions({ headers: headers });
 
-    return this.authHttp.post('http://localhost:3000/api/new', encoded_data,  options)
+    return this.authHttp.post('api/new', encoded_data,  options)
   }
 
   postVotes(poll){
@@ -45,7 +45,7 @@ export class FetchDataService {
     let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
     let options = new RequestOptions({ headers: headers });
 
-    return this.authHttp.post('http://localhost:3000/api/vote', encoded_data,  options)
+    return this.authHttp.post('api/vote', encoded_data,  options)
   }
 
   remove(poll){
@@ -53,7 +53,7 @@ export class FetchDataService {
     let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
     let options = new RequestOptions({ headers: headers });
 
-    return this.authHttp.post('http://localhost:3000/api/remove', encoded_data,  options)
+    return this.authHttp.post('api/remove', encoded_data,  options)
   }
 
   removeOption(poll){
@@ -61,7 +61,7 @@ export class FetchDataService {
     let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
     let options = new RequestOptions({ headers: headers });
 
-    return this.authHttp.post('http://localhost:3000/api/removeOption', encoded_data,  options)
+    return this.authHttp.post('api/removeOption', encoded_data,  options)
   }
 
 
