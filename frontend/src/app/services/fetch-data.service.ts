@@ -28,7 +28,7 @@ export class FetchDataService {
     let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
     let options = new RequestOptions({ headers: headers });
 
-    return this.authHttp.post('api/thisPoll', encoded_data,  options)
+    return this._http.post('api/thisPoll', encoded_data,  options)
   }
 
 

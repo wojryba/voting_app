@@ -961,7 +961,7 @@ var FetchDataService = (function () {
         var encoded_data = JSON.stringify({ id: id });
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json;charset=utf-8' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers });
-        return this.authHttp.post('api/thisPoll', encoded_data, options);
+        return this._http.post('api/thisPoll', encoded_data, options);
     };
     FetchDataService.prototype.postNewPoll = function (poll) {
         var encoded_data = JSON.stringify({ poll: poll });
