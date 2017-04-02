@@ -12,7 +12,7 @@ export class AuthService {
 
   constructor(private router: Router) {
     // Add callback for lock `authenticated` event
-    this.lock.on("authenticated", (authResult) => {
+    this.lock.on('authenticated', (authResult) => {
       localStorage.setItem('id_token', authResult.idToken);
     });
   }
@@ -31,7 +31,7 @@ export class AuthService {
   public logout() {
   // Remove token from localStorage
   localStorage.removeItem('id_token');
-  this.router.navigate([""]);
+  this.router.navigate(['']);
 }
 
 }

@@ -11,21 +11,25 @@ import { StoreDataService } from '../../services/store-data.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  polls: "string"
+  polls: 'string';
 
-  constructor(private dataService: FetchDataService, private router: RouterModule, private auth: AuthService, private router1: Router, private data: StoreDataService) { }
+  constructor(private dataService: FetchDataService,
+    private router: RouterModule,
+    private auth: AuthService,
+    private router1: Router,
+    private data: StoreDataService) { }
 
   ngOnInit() {
       this.getPolls();
   }
 
-  getPolls(){
-    this.dataService.getAllPolls().subscribe(polls=>this.polls = polls)
+  getPolls() {
+    this.dataService.getAllPolls().subscribe(polls => this.polls = polls);
   }
 
-  onClick(i){
+  onClick(i) {
     this.data.storage = this.polls[i];
-    this.router1.navigate(["poll"]);
+    this.router1.navigate(['poll']);
   }
 
 

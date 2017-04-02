@@ -13,25 +13,25 @@ import { HomeComponent } from './components/home/home.component';
 import { MypollsComponent } from './components/mypolls/mypolls.component';
 import { NewpollComponent } from './components/newpoll/newpoll.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { PollComponent } from './components/poll/poll.component'
+import { PollComponent } from './components/poll/poll.component';
 import { RedirectComponent } from './components/redirect/redirect.component';
 
-import { DropdownModule } from "ngx-dropdown";
+import { DropdownModule } from 'ngx-dropdown';
 import { ChartsModule } from 'ng2-charts';
 
 
 
-import { FetchDataService } from './services/fetch-data.service'
+import { FetchDataService } from './services/fetch-data.service';
 import { AuthService } from './services/auth.service';
 import { StoreDataService } from './services/store-data.service';
 
 
 const appRoutes: Routes = [
-  {path:'', component: HomeComponent},
-  {path:'newPoll', component: NewpollComponent},
-  {path:'myPolls', component: MypollsComponent},
-  {path:'poll', component: PollComponent},
-  {path:'r/:id', component: RedirectComponent}
+  {path: '', component: HomeComponent},
+  {path: 'newPoll', component: NewpollComponent},
+  {path: 'myPolls', component: MypollsComponent},
+  {path: 'poll', component: PollComponent},
+  {path: 'r/:id', component: RedirectComponent}
 ];
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {

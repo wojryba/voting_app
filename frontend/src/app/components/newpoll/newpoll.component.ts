@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { Poll } from './poll';
 import { FetchDataService } from '../../services/fetch-data.service';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-newpoll',
@@ -27,7 +27,7 @@ export class NewpollComponent implements OnInit {
   initOption() {
     return this.fb.group({
       option: ['', Validators.required]
-    })
+    });
   }
 
   addOption() {
@@ -43,13 +43,13 @@ export class NewpollComponent implements OnInit {
 
 
   onSubmit() {
-    let po = this.poll.value;
+    const po = this.poll.value;
     this.dataService.postNewPoll(po).subscribe(
             response => console.log(response), // success
             error => console.log(error),       // error
             () => console.log('completed')     // complete
-    )
-    this.router.navigate(["myPolls"]);
+    );
+    this.router.navigate(['myPolls']);
   }
 
 
