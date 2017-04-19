@@ -26,7 +26,7 @@ const app = express();
 app.use(cors());
 
 //set static folder for anfular2 files
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 //add middleware bodyparser
 app.use(bodyParser.json());
