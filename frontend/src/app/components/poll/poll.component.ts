@@ -18,7 +18,7 @@ export class PollComponent implements OnInit {
   po: any;
   // poll storage and options
   poll: any = this.data.storage;
-  options: any = this.data.storage.options;
+  optionss: any = this.data.storage.options;
   title: string = this.data.storage.title;
   id: string = this.data.storage['_id'];
   votes: any = [];
@@ -26,29 +26,48 @@ export class PollComponent implements OnInit {
   public showAdd = false;
   public showRemove = false;
   public form: FormGroup;
-
+  chart: any;
+  options: Object;
 
   public BU: string = 'https://twitter.com/intent/tweet?url=https%3A%2F%2Fdamp-coast-64326.herokuapp.com%2Fr%2F' + this.id;
-  // Doughnut chart
-  public doughnutChartLabels: string[] = this.titles;
-  public doughnutChartData: number[] = this.votes;
-  public doughnutChartType = 'doughnut';
+
 
 
 
   constructor(private data: StoreDataService,
               private dataService: FetchDataService,
-              private cdRef: ChangeDetectorRef,
               private router: Router,
               private fb: FormBuilder,
               private route: ActivatedRoute,
               private auth: AuthService) {
-
- }
+                this.options = {
+                  chart: {
+                      plotBackgroundColor: null,
+                      plotBorderWidth: null,
+                      plotShadow: false,
+                      type: 'pie'
+                  },
+                  title: {
+                      text: this.title
+                  },
+                  tooltip: {
+                    pointFormat: '{series.name}: <b>{point.y}</b>'
+                  },
+                  plotOptions: {
+                      pie: {
+                          allowPointSelect: true,
+                          cursor: 'pointer',
+                          dataLabels: {
+                              enabled: true,
+                              format: '<b>{point.name}</b>: {point.votes}'
+                          }
+                      }
+                  },
+                  series: []
+                };
+  }
 
   ngOnInit() {
-    this.getVotes();
-    this.getTitles();
     this.removeOption();
 
     this.form = this.fb.group({
@@ -56,49 +75,52 @@ export class PollComponent implements OnInit {
     });
   }
 
-
-  getVotes() {
-    for (const option of this.options){
-      const v = option.votes;
-      this.votes.push(v);
-    };
-
-
-  };
-
-  getTitles() {
-    for (const option of this.options){
-      const o = option.option;
-      this.titles.push(o);
+  saveInstance(chartInstance) {
+        this.chart = chartInstance;
+        this.setOptions();
     }
-  }
 
-  updateVotes() {
-    this.votes = [];
-    this.getVotes();
+  setOptions() {
+    const options = this.poll.options;
+    const series = {
+        name: 'Votes',
+        colorByPoint: true,
+        data: []
+        };
+        options.map(val => {
+          const d = {
+            name: val.option,
+            y: val.votes
+          }
+          series.data.push(d);
+        });
+    this.chart.addSeries(series);
   }
 
   onClick(i) {
     this.poll.options[i].votes = this.poll.options[i].votes + 1;
     const po = this.poll;
     this.dataService.postVotes(po).subscribe(
-            response => console.log(response), // success
-            error => console.log(error),       // error
-            () => console.log('completed')     // complete
+            response => {
+              this.chart.series[0].remove(true);
+              this.setOptions();
+            },
+            error => console.log(error),
+            () => console.log('completed')
           );
-    this.router.navigate(['r', this.id]);
+  //this.router.navigate(['r', this.id]);
   }
 
 
   // function on remobe button, deletes poll form database
   removePoll() {
-    const po = this.poll;
-    this.dataService.remove(po).subscribe(
-            response => console.log(response), // success
+    this.dataService.remove(this.poll).subscribe(
+            response => {
+              this.router.navigate(['myPolls']);
+            }, // success
             error => console.log(error),       // error
             () => console.log('completed')     // complete
           );
-    this.router.navigate(['myPolls']);
   }
 
   // check if current user is the one that created option
@@ -108,6 +130,7 @@ export class PollComponent implements OnInit {
     this.dataService.removeOption(po).subscribe(
             response => {
               if (response['_body'] === 'show') { this.showRemove = true; }
+              console.log('dasds');
             }, // success
             error => console.log(error),       // error
             () => console.log('completed')     // complete
@@ -120,27 +143,19 @@ export class PollComponent implements OnInit {
     const o = this.form.value;
     o.votes = 1;
     this.poll.options.push(o);
-    const po = this.poll;
-    this.dataService.postVotes(po).subscribe(
-            response => console.log(response), // success
-            error => console.log(error),       // error
-            () => console.log('completed')     // complete
+    this.dataService.postVotes(this.poll).subscribe(
+            response => {
+              this.chart.series[0].remove(true);
+              this.setOptions();
+            },
+            error => console.log(error),
+            () => console.log('completed')
           );
-    this.router.navigate(['r', this.id]);
   }
 
   // redirect to tweet website
   tweet() {
     window.location.href = this.BU;
   }
-
-  public chartClicked(e: any): void {
-    console.log(e);
-  }
-
-  public chartHovered(e: any): void {
-    console.log(e);
-  }
-
 
 }

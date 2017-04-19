@@ -18,7 +18,8 @@ import { RedirectComponent } from './components/redirect/redirect.component';
 
 import { DropdownModule } from 'ngx-dropdown';
 import { ChartsModule } from 'ng2-charts';
-
+import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
+import { ChartModule } from 'angular2-highcharts';
 
 
 import { FetchDataService } from './services/fetch-data.service';
@@ -37,6 +38,12 @@ const appRoutes: Routes = [
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp( new AuthConfig({}), http, options);
 }
+
+declare var require: any;
+export function highchartsFactory() {
+  return require('highcharts');
+}
+
 
 
 @NgModule({
@@ -57,13 +64,16 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     RouterModule.forRoot(appRoutes),
     ReactiveFormsModule,
     DropdownModule,
-    ChartsModule
+    ChartModule
   ],
   providers: [FetchDataService, AuthService, StoreDataService, {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
       deps: [ Http, RequestOptions ]
-    } ],
+    }, {
+      provide: HighchartsStatic,
+      useFactory: highchartsFactory
+    }, ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,20 +1,13 @@
 
-<div class=container>
+<div class="container">
 
   <div class="chart">
-      <canvas baseChart
-              [data]="doughnutChartData"
-              [labels]="doughnutChartLabels"
-              [chartType]="doughnutChartType"
-              (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)">
-      </canvas>
+    <chart [options]="options" (load)="saveInstance($event.context)"> </chart>
   </div>
 
 
+
   <div class="options">
-
-
         <div class="form">
             <h2>{{title}}</h2>
             <br>
@@ -22,7 +15,7 @@
             <div class="dropdown" dropdown>
                 <button class="form-control" dropdown-open>Select Option</button>
                 <ul class="dropdown-menu">
-                    <li class="form-control" *ngFor="let option of options; let i = index" (click)="onClick(i)">{{option.option}}</li>
+                    <li class="form-control" *ngFor="let option of optionss; let i = index" (click)="onClick(i)">{{option.option}}</li>
                     <li class="form-control" *ngIf="auth.authenticated()" (click)="showAdd = true">add another option</li>
                 </ul>
             </div>

@@ -11,7 +11,7 @@ const findOrCreate = require('mongoose-findorcreate');
 
 const port = process.env.PORT || 8080;
 
-var connect = process.env.MONGODB_URI
+var connect = process.env.MONGODB_URI ||  "mongodb://localhost/votingApp"
 mongoose.connect(connect);
 mongoose.connection.on("connected", function (){
   console.log("Connected to db")
