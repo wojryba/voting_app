@@ -64,8 +64,11 @@ router.post('/vote', function(req, res){
   var title = req.body.poll.title;
   var id = req.body.poll._id
 
-  Poll.findByIdAndUpdate(id, {$set: {options: req.body.poll.options}}, function(err,res){
-    if (err) console.log(err)
+  Poll.findByIdAndUpdate(id, {$set: {options: req.body.poll.options}}, function(err, poll){
+    if (err) {
+      return res.status(400).send(err)
+    }
+    return res.send('done');
   });
 
 });

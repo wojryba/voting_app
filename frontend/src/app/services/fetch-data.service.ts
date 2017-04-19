@@ -13,14 +13,14 @@ export class FetchDataService {
 
   // get all polls form db
   getAllPolls() {
-    return this._http.get('api/allPolls')
+    return this._http.get('http://localhost:8080/api/allPolls')
     .map( (res) => res.json() );
 
   }
 
   // get polls post by this user
   getUserPolls() {
-    return this.authHttp.get('api/userPolls')
+    return this.authHttp.get('http://localhost:8080/api/userPolls')
     .map( (res) => res.json() );
   }
 
@@ -31,7 +31,7 @@ export class FetchDataService {
     const headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
     const options = new RequestOptions({ headers: headers });
 
-    return this._http.post('api/thisPoll', encoded_data,  options);
+    return this._http.post('http://localhost:8080/api/thisPoll', encoded_data,  options);
   }
 
   // add poll to database
@@ -40,7 +40,7 @@ export class FetchDataService {
     const headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
     const options = new RequestOptions({ headers: headers });
 
-    return this.authHttp.post('api/new', encoded_data,  options);
+    return this.authHttp.post('http://localhost:8080/api/new', encoded_data,  options);
   }
 
   // update votes in db
@@ -48,8 +48,8 @@ export class FetchDataService {
     const encoded_data = JSON.stringify({ poll });
     const headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
     const options = new RequestOptions({ headers: headers });
-
-    return this._http.post('api/vote', encoded_data,  options);
+    
+    return this._http.post('http://localhost:8080/api/vote', encoded_data,  options);
   }
 
 
@@ -59,7 +59,7 @@ export class FetchDataService {
     const headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
     const options = new RequestOptions({ headers: headers });
 
-    return this.authHttp.post('api/remove', encoded_data,  options);
+    return this.authHttp.post('http://localhost:8080/api/remove', encoded_data,  options);
   }
 
 
@@ -69,7 +69,7 @@ export class FetchDataService {
     const headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
     const options = new RequestOptions({ headers: headers });
 
-    return this.authHttp.post('api/removeOption', encoded_data,  options);
+    return this.authHttp.post('http://localhost:8080/api/removeOption', encoded_data,  options);
   }
 
 
